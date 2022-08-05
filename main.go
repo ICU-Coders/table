@@ -7,7 +7,7 @@ import (
 )
 
 var MaxCellWidth = 40
-var LineEndTag = "*"
+var LineEndTag = "+"
 var LineBody = "-"
 var LineDivider = "|"
 

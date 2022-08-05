@@ -5,6 +5,8 @@
 
 # Terminal Table
 
+![example](./example.png)
+
 ### How To Use
 
 ```shell
@@ -14,22 +16,22 @@ go get github.com/ICU-Coders/table
 import "github.com/ICU-Coders/table"
 
 table.Show([]string{"Module", "Type", "Path", "Author"}, [][]string{
-	{"1", "2", "3", "4"},
+    {"1", "2", "3", "4"},
     {"1", "2", "3", "4"},
     {"1", "2", "3", "4"},
     {"1", "2", "3", "4"},
 })
 ```
 
-![example](./example.png)
 
 ### Config
 ```go
 var MaxCellWidth = 40
-var LineEndTag = "*"
+var LineEndTag = "+"
 var LineBody = "-"
 var LineDivider = "|"
 ```
+
 Example
 ```go
 func TestShow(t *testing.T) {
@@ -55,6 +57,33 @@ Display
 / 1      / 2    / 3    / 4      /
 *========*======*======*========*
 ```
+
+### Auto warp
+
+```go
+MaxCellWidth = 20 // default 40
+Show([]string{"Module", "Type", "Path", "Author"}, [][]string{
+    {"11111111111111111111111111111111111111", "2", "3", "4"},
+    {"1", "2", "3", "4"},
+    {"1", "2", "3", "4"},
+    {"1", "2", "3", "4"},
+})
+
+
+```
+
+```go
++----------------------+------+------+--------+
+| Module               | Type | Path | Author |
++----------------------+------+------+--------+
+| 11111111111111111111 | 2    | 3    | 4      |
+| 111111111111111111   |      |      |        |
+| 1                    | 2    | 3    | 4      |
+| 1                    | 2    | 3    | 4      |
+| 1                    | 2    | 3    | 4      |
++----------------------+------+------+--------+
+```
+
 ## MIT License
 
 Copyright (c) 2022 ICU-Coders
