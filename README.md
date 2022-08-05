@@ -10,8 +10,51 @@
 ```shell
 go get github.com/ICU-Coders/table
 ```
+```go
+import "github.com/ICU-Coders/table"
 
+table.Show([]string{"Module", "Type", "Path", "Author"}, [][]string{
+	{"1", "2", "3", "4"},
+    {"1", "2", "3", "4"},
+    {"1", "2", "3", "4"},
+    {"1", "2", "3", "4"},
+})
+```
 
+![example](./example.png)
+
+### Config
+```go
+var MaxCellWidth = 40
+var LineEndTag = "*"
+var LineBody = "-"
+var LineDivider = "|"
+```
+Example
+```go
+func TestShow(t *testing.T) {
+	LineEndTag = "*"
+	LineBody = "="
+	LineDivider = "/"
+	Show([]string{"Module", "Type", "Path", "Author"}, [][]string{
+		{"1111", "2", "3", "4"},
+		{"1", "2", "3", "4"},
+		{"1", "2", "3", "4"},
+		{"1", "2", "3", "4"},
+	})
+}
+```
+Display
+```
+*========*======*======*========*
+/ Module / Type / Path / Author /
+*========*======*======*========*
+/ 1111   / 2    / 3    / 4      /
+/ 1      / 2    / 3    / 4      /
+/ 1      / 2    / 3    / 4      /
+/ 1      / 2    / 3    / 4      /
+*========*======*======*========*
+```
 ## MIT License
 
 Copyright (c) 2022 ICU-Coders

@@ -7,6 +7,9 @@ import (
 )
 
 var MaxCellWidth = 40
+var LineEndTag = "*"
+var LineBody = "-"
+var LineDivider = "|"
 
 func trimTableCell(headers []string, content [][]string) {
 	for i, header := range headers {
@@ -75,6 +78,9 @@ func tableBorder(maxWidths []int) string {
 func row(row []string, maxWidth []int) string {
 	maxLine := 0
 	for i, cell := range row {
+		if i >= len(maxWidth) {
+			break
+		}
 		lines := howManyLine(cell, maxWidth[i])
 		if lines > maxLine {
 			maxLine = lines
@@ -82,12 +88,14 @@ func row(row []string, maxWidth []int) string {
 	}
 	bufferString := bytes.NewBufferString("")
 	for i := 0; i < maxLine; i++ {
-		bufferString.WriteString("|")
+		bufferString.WriteString(LineDivider)
 		for j, s := range row {
-			// fixme 检查row和maxWidth长度
-			bufferString.WriteString(" ")
-			bufferString.WriteString(fixStr(s, i, maxWidth[j]))
-			bufferString.WriteString(" |")
+			if j < len(maxWidth) {
+				bufferString.WriteString(" ")
+				bufferString.WriteString(fixStr(s, i, maxWidth[j]))
+				bufferString.WriteString(" ")
+				bufferString.WriteString(LineDivider)
+			}
 		}
 		bufferString.WriteString("\n")
 	}
@@ -95,12 +103,12 @@ func row(row []string, maxWidth []int) string {
 }
 
 func borderWithEnd(length int, end bool) string {
-	bufferString := bytes.NewBufferString("+")
+	bufferString := bytes.NewBufferString(LineEndTag)
 	for i := 0; i < length; i++ {
-		bufferString.WriteString("-")
+		bufferString.WriteString(LineBody)
 	}
 	if end {
-		bufferString.WriteString("+")
+		bufferString.WriteString(LineEndTag)
 	}
 	return bufferString.String()
 }
