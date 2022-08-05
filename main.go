@@ -19,7 +19,7 @@ func trimTableCell(headers []string, content [][]string) {
 	}
 }
 
-func Table(headers []string, content [][]string) {
+func Show(headers []string, content [][]string) {
 	trimTableCell(headers, content)
 	// 寻找每列最长字符
 	maxWidths := make([]int, len(headers), len(headers))
